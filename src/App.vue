@@ -4,7 +4,7 @@
     <div class="menu">
       <router-link to="/" class="custom-link">Home</router-link>
       <router-link to="/About" class="custom-link">About</router-link>
-      <router-link to="/about" class="custom-link">Food Menu</router-link>
+      <router-link to="/FoodMenu" class="custom-link">Food Menu</router-link>
       <router-link to="/about" class="custom-link">About</router-link>
     </div>
     <div class="icon">
@@ -62,10 +62,7 @@
   </footer>
 </template>
 
-<style>
-*{
-  background-color: #F5EDA2;
-}
+<style scoped>
 a{
   text-decoration: none;
 }
@@ -194,6 +191,7 @@ ul {
   border-radius: 15px;
   transition: .3s;
   margin-right: 10px;
+  color: #F28D35;
 }
 
 .social a:hover {
