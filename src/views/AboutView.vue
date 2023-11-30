@@ -68,14 +68,13 @@
 import AboutViewChild from "@/components/AboutViewChild.vue";
 
 export default {
-  name: "HomeView",
+  name: "AboutView",
   components: {
     AboutViewChild,
   },
 };
 
 </script>
-
 
 <style>
 .presentation {
@@ -88,7 +87,6 @@ export default {
 
 .presentation img {
   height: 500px;
-  ;
   width: 500px;
   margin-top: -50px;
 }
@@ -96,6 +94,7 @@ export default {
 .presentation h1 {
   font-size: 35px;
   color: #F28D35;
+  margin-bottom: -70px;
 }
 
 .presentation p {
@@ -107,6 +106,7 @@ export default {
   text-align: center;
   font-size: 50px;
   color: #F28D35;
+  margin-bottom: -100px;
 }
 
 .cadres {
@@ -152,9 +152,11 @@ h2 {
 .story h1 {
   font-size: 50px;
   color: #F28D35;
+  margin-bottom: -50px;
 }
 
 .story p {
+  font-size: 20px;
   text-align: center;
   margin-left: 100px;
   text-align: justify;

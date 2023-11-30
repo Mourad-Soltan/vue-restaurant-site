@@ -20,19 +20,19 @@ export default {
           p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
-          id:1,
+          id:2,
           name: "Chef name",
           image: require("@/assets/images/pngegg (1).png"),
           p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
-          id:1,
+          id:3,
           name: "Chef name",
           image: require("@/assets/images/pngegg (2).png"),
           p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
-          id:1,
+          id:4,
           name: "Chef name",
           image: require("@/assets/images/pngegg (3).png"),
           p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
