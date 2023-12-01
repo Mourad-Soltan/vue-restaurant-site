@@ -8,8 +8,8 @@
         </h1>
       </div>
       <p>
-        Explorez le prestige du goût au cœur de notre restaurant, où chaque plat est une œuvre d'art culinaire, 
-        savamment préparé pour éveiller vos papilles et vous offrir une expérience gastronomique inoubliable
+        Indulge in the taste of prestige at our restaurant, where each dish is a culinary masterpiece,
+         expertly crafted to tantalize your taste buds and provide an unforgettable gastronomic experience
       </p>
       <div>
         <button class="btn">
