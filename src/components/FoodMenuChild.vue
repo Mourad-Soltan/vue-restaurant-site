@@ -89,7 +89,7 @@ export default {
                     image: require("../assets/images/food(11).jpeg"),
                     p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
                 },
-            ]
+            ],
         };
     },
 

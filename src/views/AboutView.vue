@@ -111,7 +111,7 @@ export default {
 
 .cadres {
   display: grid;
-  grid-template-columns: repeat(4, 300px);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 50px;
   margin-top: 100px;
