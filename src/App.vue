@@ -4,11 +4,12 @@
     <div class="menu">
       <router-link to="/" class="custom-link">Home</router-link>
       <router-link to="/About" class="custom-link">About</router-link>
-      <router-link to="/FoodMenu" class="custom-link">Food Menu</router-link>
-      <router-link to="/about" class="custom-link">About</router-link>
+      <router-link to="/FoodMenu" class="custom-link" @update-carte="updatePanier">Food Menu</router-link>
+      <router-link to="/Reservation" class="custom-link">Reservation</router-link>
     </div>
     <div class="icon">
       <router-link to="/" class="custom-link"><img src="@/assets/icons/house-chimney-1.png"></router-link>
+      <img src="@/assets/icons/cart.svg">
       <img src="@/assets/icons/search-alternate.png">
     </div>
   </nav>
@@ -61,14 +62,40 @@
     </div>
   </footer>
 </template>
+<script>
+export default {
+  name: "app",
+  components: {
+
+  },
+  data() {
+    return {
+      panier: [],
+    }
+
+  },
+  methods: {
+    updatePanier(food) {
+      console.log("test",panier);
+      console.log("Update panier method called:",food);
+      this.panier.push(food);
+      console.log("Panier:", this.panier);
+    }
+
+
+  }
+};
+</script>
+
 
 <style scoped>
-a{
+a {
   text-decoration: none;
 }
+
 nav {
   display: grid;
-  grid-template-columns: 3fr 4fr 1fr;
+  grid-template-columns: 3fr 4fr 1.5fr;
   padding: 20px;
   padding-bottom: -10px;
 }
@@ -89,7 +116,7 @@ nav img {
 .menu {
   display: grid;
   grid-template-columns: 50px 50px 100px 50px;
-  gap: 100px;
+  gap: 70px;
   font-size: 20px;
   color: black;
   margin-top: 3px;
@@ -116,11 +143,11 @@ footer {
   margin-top: -100px;
 }
 
-ul{
-    list-style-type: none;
+ul {
+  list-style-type: none;
 }
 
-.list{
+.list {
   background-color: #FFE36B;
 }
 
@@ -197,7 +224,8 @@ ul {
 .social a:hover {
   transform: scale(1.1);
 }
-.social h4{
+
+.social h4 {
   background-color: #FFE36B;
   color: #F28D35;
 }
@@ -211,9 +239,8 @@ ul {
   background-color: #FFE36B;
   padding-bottom: 50px;
 }
-.end-text p{
+
+.end-text p {
   background-color: #FFE36B;
 }
-
-
 </style>
