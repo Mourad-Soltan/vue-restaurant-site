@@ -1,9 +1,8 @@
 <template>
   <h1>Food Menu</h1>
   <section class="FoodMenu">
-    <FoodMenuChild></FoodMenuChild>
+    <FoodMenuChild :foods="foods" @add="add" @del="del" @update-carte="update"></FoodMenuChild>
   </section>
-  
 </template>
 
 
@@ -13,14 +12,127 @@ import FoodMenuChild from "@/components/FoodMenuChild.vue";
 
 export default {
   name: "FoodMenu",
+  emits: ['add', 'del', 'update-carte'],
   components: {
     FoodMenuChild,
+  },
+  data() {
+    return {
+      cart: 1,
+      foods: [
+        {
+          id: 0,
+          name: "Food Name",
+          image: require("../assets/images/food.jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 1,
+          name: "Food Name",
+          image: require("../assets/images/food(1).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 2,
+          name: "Food Name",
+          image: require("../assets/images/food(2).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 3,
+          name: "Food Name",
+          image: require("../assets/images/food(3).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 4,
+          name: "Food Name",
+          image: require("../assets/images/food(4).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 5,
+          name: "Food Name",
+          image: require("../assets/images/food(5).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 6,
+          name: "Food Name",
+          image: require("../assets/images/food(6).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 7,
+          name: "Food Name",
+          image: require("../assets/images/food(7).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 8,
+          name: "Food Name",
+          image: require("../assets/images/food(8).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 9,
+          name: "Food Name",
+          image: require("../assets/images/food(9).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 10,
+          name: "Food Name",
+          image: require("../assets/images/food(10).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+        {
+          id: 11,
+          name: "Food Name",
+          image: require("../assets/images/food(11).jpeg"),
+          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          nborder: 0,
+        },
+      ],
+      panier:[],
+    };
+  },
+  methods: {
+    add(food) {
+      //console.log(food.nborder);
+      food.nborder++;
+    },
+    del(food) {
+      //console.log(food.nborder);
+      food.nborder--;
+    },
+    update(food) {
+      for(let i=0;i<this.panier.length;i++){
+        if(this.panier[i].nborder==food.nborder){
+          this.panier.splice(i,1);
+        }
+      }
+      this.panier.push(food);
+      console.log(this.panier);
+    },
+
   },
 };
 </script>
 
 <style>
-h1{
+h1 {
   text-align: center;
   font-size: 45px;
   color: #F28D35;

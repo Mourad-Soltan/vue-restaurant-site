@@ -1,11 +1,17 @@
 <template>
     <div v-for="(food, index) in foods" :key="index" class="card">
-        <div class="imgbox">
-            <img :src="food.image" class="img">
-        </div>
-        <div class="details">
-            <h2 class="title">{{ food.name }}</h2>
-            <span class="caption">{{ food.p }}</span>
+        <img :src="food.image" class="img">
+        <div class="card__content">
+            <p class="card__title">{{ food.name }}</p>
+            <p class="card__description">{{ food.p }}</p>
+            <div class="nborder">
+                <button v-if="food.nborder > 0" v-on:click="del(food)">-</button>
+                <button v-else style="cursor: no-drop;">-</button>
+                <span>{{ food.nborder }}</span>
+                <button v-on:click="add(food)">+</button>
+            </div>
+            <button v-if="food.nborder > 0" class="add_to_order" v-on:click="update(food)">add to order</button>
+            <button v-else class="add_to_order" style="cursor: no-drop;">add to order</button>
         </div>
     </div>
 </template>
@@ -14,86 +20,139 @@
 <script>
 export default {
     name: "FoodMenuChild",
-    data() {
-        return {
-            foods: [
-                {
-                    id: 0,
-                    name: "Food Name",
-                    image: require("../assets/images/food.jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 1,
-                    name: "Food Name",
-                    image: require("../assets/images/food(1).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 2,
-                    name: "Food Name",
-                    image: require("../assets/images/food(2).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 3,
-                    name: "Food Name",
-                    image: require("../assets/images/food(3).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 4,
-                    name: "Food Name",
-                    image: require("../assets/images/food(4).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 5,
-                    name: "Food Name",
-                    image: require("../assets/images/food(5).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 6,
-                    name: "Food Name",
-                    image: require("../assets/images/food(6).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 7,
-                    name: "Food Name",
-                    image: require("../assets/images/food(7).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 8,
-                    name: "Food Name",
-                    image: require("../assets/images/food(8).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 9,
-                    name: "Food Name",
-                    image: require("../assets/images/food(9).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 10,
-                    name: "Food Name",
-                    image: require("../assets/images/food(10).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-                {
-                    id: 11,
-                    name: "Food Name",
-                    image: require("../assets/images/food(11).jpeg"),
-                    p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                },
-            ],
-        };
+    emits: ['add', 'del', 'update-carte'],
+    props: {
+        foods: {
+            type: Array,
+            required: true,
+        }
     },
+    data() {
+        return {};
+    },
+    methods: {
+        add(food) {
+            //console.log(food.nborder);
+            //food.nborder++;
+            this.$emit('add', food);
+        },
+        del(food) {
+            this.$emit('del', food);
+        },
+        update(food) {
+            //console.log("Update method in FoodMenuChild.vue called:", food);
+            this.$emit('update-carte', food);
+        },
 
-
-
-}
+    }
+};
 </script>
+
+<style scoped>
+.card {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+    box-shadow: 0 0 0 5px #ffffff80;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card svg {
+    width: 48px;
+    fill: #333;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .card__content {
+    transform: rotateX(0deg);
+}
+
+.card__title {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+}
+
+.card:hover svg {
+    scale: 0;
+}
+
+.card__description {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.add_to_order {
+    border: none;
+    outline: none;
+    background-color: #F28D35;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 5px;
+    transition: all ease 0.1s;
+    box-shadow: 0px 5px 0px 0px #FFE36B;
+    position: relative;
+    top: 35px;
+    left: 170px;
+}
+
+.add_to_order:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #a29bfe;
+}
+
+.nborder {
+    display: grid;
+    grid-template-columns: 10px 15px 10px;
+    gap: 10px;
+    font-size: 20px;
+    position: relative;
+    top: 65px;
+    left: 100px;
+}
+
+.nborder button {
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nborder button:nth-child(1) {
+    margin-top: -5px;
+}
+
+.nborder span {
+    padding-left: 5px;
+}
+</style>
