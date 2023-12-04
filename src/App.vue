@@ -4,7 +4,7 @@
     <div class="menu">
       <router-link to="/" class="custom-link">Home</router-link>
       <router-link to="/About" class="custom-link">About</router-link>
-      <router-link to="/FoodMenu" class="custom-link" @update-carte="updatePanier">Food Menu</router-link>
+      <router-link to="/FoodMenu" class="custom-link">Food Menu</router-link>
       <router-link to="/Reservation" class="custom-link">Reservation</router-link>
     </div>
     <div class="icon">
@@ -15,9 +15,12 @@
   </nav>
   <hr>
 
+
   <router-view />
 
   <hr>
+ 
+    
   <footer id="contact">
     <div class="footer">
       <div class="main">
@@ -70,20 +73,13 @@ export default {
   },
   data() {
     return {
-      panier: [],
+      
     }
-
   },
   methods: {
-    updatePanier(food) {
-      console.log("test",panier);
-      console.log("Update panier method called:",food);
-      this.panier.push(food);
-      console.log("Panier:", this.panier);
-    }
-
-
-  }
+  },
+  computed: {
+},
 };
 </script>
 

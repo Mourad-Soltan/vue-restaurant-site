@@ -105,6 +105,7 @@ export default {
           nborder: 0,
         },
       ],
+      panier:[],
     };
   },
   methods: {
@@ -116,10 +117,14 @@ export default {
       //console.log(food.nborder);
       food.nborder--;
     },
-    // In FoodMenu.vue
     update(food) {
-      console.log("Update method called: ", food);
-      this.$emit("update-carte", food);
+      for(let i=0;i<this.panier.length;i++){
+        if(this.panier[i].nborder==food.nborder){
+          this.panier.splice(i,1);
+        }
+      }
+      this.panier.push(food);
+      console.log(this.panier);
     },
 
   },

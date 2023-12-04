@@ -10,7 +10,8 @@
                 <span>{{ food.nborder }}</span>
                 <button v-on:click="add(food)">+</button>
             </div>
-            <button class="add_to_order" v-on:click="update(food)">add to order</button>
+            <button v-if="food.nborder > 0" class="add_to_order" v-on:click="update(food)">add to order</button>
+            <button v-else class="add_to_order" style="cursor: no-drop;">add to order</button>
         </div>
     </div>
 </template>
@@ -39,7 +40,7 @@ export default {
             this.$emit('del', food);
         },
         update(food) {
-            console.log("Update method in FoodMenuChild.vue called:", food);
+            //console.log("Update method in FoodMenuChild.vue called:", food);
             this.$emit('update-carte', food);
         },
 
