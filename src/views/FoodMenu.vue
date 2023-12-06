@@ -200,6 +200,7 @@ export default {
   text-align: center;
   color: #F28D35;
   padding-bottom: 100px;
+  margin-top: 50px;
 }
 
 .FoodMenu {
@@ -397,4 +398,5 @@ export default {
   .profileFood h5 {
     margin-top: 10px;
   }
-}</style>
+}
+</style>

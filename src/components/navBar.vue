@@ -12,6 +12,7 @@
             <img src="@/assets/icons/search-alternate.png">
         </div>
     </nav>
+    <hr>
 </template>
 
 <script>
@@ -64,6 +65,12 @@ nav img {
 .custom-link:hover {
     color: #F28D35;
     transform: scale(1.1);
+}
+
+hr {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    border: 2px solid #F28D35;
 }
 
 @media screen and (max-width : 1040px) {
