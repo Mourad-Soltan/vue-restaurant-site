@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="pix_btn text-center">
-				<a href="../../views/FoodMenu.vue" class="button btn-effect mt-5">View full menu</a>
+        <router-link to="/FoodMenu" class="button btn-effect mt-5">View full menu</router-link>
 			</div>
 		</div>
 	</section>
