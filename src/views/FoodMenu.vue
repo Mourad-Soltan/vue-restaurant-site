@@ -1,9 +1,9 @@
 <template>
-  <h1>Food Menu</h1>
+  <h1 id="titre">Food Menu</h1>
   <section class="FoodMenu">
     <FoodMenuChild :foods="foods" @add="add" @del="del" @update-carte="update"></FoodMenuChild>
   </section>
-  <section class="panier card" v-if="paniers.length>0">
+  <section class="panier" v-if="paniers.length > 0">
     <div class="head">
       <h5>FOODS</h5>
       <h5>PRIX</h5>
@@ -32,9 +32,9 @@
     </div>
     <div class="Valide">
       <span>TOTAL : {{ tolat }}</span>
-    <button class="add_to_order">Valider La Commande</button>
+      <button class="add_to_order">Valider La Commande</button>
     </div>
-    
+
   </section>
 </template>
 
@@ -182,23 +182,22 @@ export default {
       return food.nborder * food.prix;
     },
   },
-  computed:{
-    tolat(){
-      let montants=0;
-      for(let i=0;i<this.paniers.length;i++){
-        montants+=(this.paniers[i].prix*this.paniers[i].nborder);
+  computed: {
+    tolat() {
+      let montants = 0;
+      for (let i = 0; i < this.paniers.length; i++) {
+        montants += (this.paniers[i].prix * this.paniers[i].nborder);
       }
       return montants
     }
   }
-  
+
 };
 </script>
 
-<style>
-h1 {
+<style scoped>
+#titre {
   text-align: center;
-  font-size: 45px;
   color: #F28D35;
   padding-bottom: 100px;
 }
@@ -252,32 +251,6 @@ h1 {
   background: #fff;
 }
 
-.caption {
-  font-weight: 500;
-  font-size: 14px;
-  color: black;
-  display: block;
-  margin-top: -7px;
-  background: #fff;
-  border-radius: 20px;
-}
-
-/*Hover*/
-.card:hover .imgbox {
-  bottom: 80px;
-}
-
-.card:hover:before {
-  transform: rotate(20deg);
-  border-radius: 20px;
-}
-
-.card:hover:after {
-  transform: rotate(10deg);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, .2);
-  border-radius: 20px;
-}
-
 .head {
   display: grid;
   grid-template-columns: 5fr 1fr 1fr 1fr;
@@ -288,12 +261,13 @@ h1 {
 .panier {
   margin: 50px;
   padding: 20px;
+  background-color: #ccc;
+  border-radius: 20px;
 }
 
 .panier hr {
-  border: 1px solid #ccc;
+  border: 1px solid black;
   margin-bottom: 20px;
-
 }
 
 .body {
@@ -304,66 +278,123 @@ h1 {
   gap: 50px;
 }
 
+.body h4 {
+  margin-top: 10px;
+}
+
 .body img {
   width: 100px;
   border-radius: 20px;
 }
 
-.card {
-  max-width: none;
-  height: auto;
-  background: white;
-  border-radius: 10px;
-  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
 .profileFood {
   display: grid;
   grid-template-columns: 2fr 3fr;
+  gap: 20px;
+}
 
+.profileFood h5 {
+  margin-top: 20px;
 }
 
 .quatite {
   display: grid;
   grid-template-columns: 15px 20px;
   gap: 5px;
-  
   padding-left: 30px;
+  margin-top: 10px;
 }
 
 .add_del {
-  display: flex;
-  flex-direction: column;
-  margin-top: -10px;
+  display: grid;
+  grid-template-rows: 30px 5px;
+  margin-top: -20px;
 }
 
 .add_del button {
   border: none;
-  background-color: white;
+  background-color: #ccc;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: bold;
 }
-.Valide button{
+
+.Valide button {
   border: none;
-    outline: none;
-    background-color: #F28D35;
-    padding: 10px 15px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    border-radius: 5px;
-    transition: all ease 0.1s;
-    box-shadow: 0px 5px 0px 0px #FFE36B;
-    position: relative;
-    left:82%;
+  outline: none;
+  background-color: #F28D35;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #FFE36B;
+  position: relative;
+  left: 82%;
 }
+
 .Valide button:active {
-    transform: translateY(5px);
-    box-shadow: 0px 0px 0px 0px #a29bfe;
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
 }
-.Valide span{
+
+.Valide span {
   position: relative;
   left: 80%;
 }
-</style>
+
+@media screen and (max-width : 1200px) {
+  .FoodMenu {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+  }
+
+  .Valide button {
+    left: 70%;
+  }
+
+  .Valide span {
+    left: 65%;
+  }
+
+  .panier * {
+    font-size: 20px;
+  }
+
+  .add_del button {
+    font-size: 20px;
+  }
+
+
+}
+
+@media screen and (max-width : 600px) {
+
+  .FoodMenu {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+  }
+
+  .Valide button {
+    left: 50%;
+  }
+
+  .Valide span {
+    left: 45%;
+  }
+
+  .panier * {
+    font-size: 15px;
+  }
+
+  .add_del button {
+    font-size: 15px;
+  }
+
+  .profileFood h5 {
+    margin-top: 10px;
+  }
+}</style>

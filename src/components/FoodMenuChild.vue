@@ -134,12 +134,11 @@ export default {
 
 .nborder {
     display: grid;
-    grid-template-columns: 10px 15px 10px;
-    gap: 10px;
+    grid-template-columns: 25px 25px 15px;
     font-size: 20px;
     position: relative;
     top: 60px;
-    left: 100px;
+    left: 95px;
 }
 
 .nborder button {
@@ -153,6 +152,6 @@ export default {
 }
 
 .nborder span {
-    padding-left: 5px;
+    padding-left: 2px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section class="presentation">
     <div>
-      <h1>About Us</h1>
+      <h1 id="titre">About Us</h1>
       <p>
         Welcome to Prestige du Goût, an exceptional culinary experience dedicated to awakening your taste buds and you
         to discover the quintessence of gastronomy. Since our opening, we have strived to create a place where
@@ -77,12 +77,18 @@ export default {
 </script>
 
 <style>
+#titre{
+  text-align: center;
+  color: #F28D35;
+  padding-bottom: 100px;
+}
 .presentation {
   display: grid;
   grid-template-columns: 500px auto;
   justify-content: center;
   gap: 50px;
   margin-bottom: 100px;
+  margin-top: 50px;
 }
 
 .presentation img {
@@ -106,7 +112,7 @@ export default {
   text-align: center;
   font-size: 50px;
   color: #F28D35;
-  margin-bottom: -100px;
+  margin-bottom: 50px;
 }
 
 .cadres {
@@ -114,8 +120,9 @@ export default {
   grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 50px;
-  margin-top: 100px;
+  margin-top: 70px;
   margin-bottom: 150px;
+  padding: 30px;
 }
 
 .cadre {
@@ -152,11 +159,11 @@ h2 {
 .story h1 {
   font-size: 50px;
   color: #F28D35;
-  margin-bottom: -50px;
+  margin-bottom: 50px;
 }
 
 .story p {
-  font-size: 20px;
+  font-size: 15px;
   text-align: center;
   margin-left: 100px;
   text-align: justify;
