@@ -112,7 +112,7 @@ nav img {
 
 .menu {
   display: grid;
-  grid-template-columns: 50px 50px 100px 50px;
+  grid-template-columns: 50px 50px 120px 50px;
   gap: 70px;
   font-size: 20px;
   color: black;

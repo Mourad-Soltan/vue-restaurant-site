@@ -2,7 +2,7 @@
     <div v-for="(food, index) in foods" :key="index" class="card">
         <img :src="food.image" class="img">
         <div class="card__content">
-            <p class="card__title">{{ food.name }}</p>
+            <h5 class="card__title">{{ food.name }}</h5>
             <p class="card__description">{{ food.p }}</p>
             <div class="nborder">
                 <button v-if="food.nborder > 0" v-on:click="del(food)">-</button>
@@ -123,7 +123,7 @@ export default {
     transition: all ease 0.1s;
     box-shadow: 0px 5px 0px 0px #FFE36B;
     position: relative;
-    top: 35px;
+    top: 23px;
     left: 170px;
 }
 
@@ -138,7 +138,7 @@ export default {
     gap: 10px;
     font-size: 20px;
     position: relative;
-    top: 65px;
+    top: 60px;
     left: 100px;
 }
 

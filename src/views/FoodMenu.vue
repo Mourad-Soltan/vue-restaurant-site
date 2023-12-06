@@ -5,10 +5,10 @@
   </section>
   <section class="panier card" v-if="paniers.length>0">
     <div class="head">
-      <h3>FOODS</h3>
-      <h3>PRIX</h3>
-      <h3>QUANTITÉ</h3>
-      <h3>TOTAL</h3>
+      <h5>FOODS</h5>
+      <h5>PRIX</h5>
+      <h5>QUANTITÉ</h5>
+      <h5>TOTAL</h5>
     </div>
     <hr>
     <br>
@@ -16,11 +16,11 @@
       <div class="body" v-if="panier.nborder > 0">
         <div class="profileFood">
           <img :src="panier.image">
-          <h4>{{ panier.name }}</h4>
+          <h5>{{ panier.name }}</h5>
         </div>
         <h4>{{ panier.prix }}</h4>
         <div class="quatite">
-          <span>{{ panier.nborder }}</span>
+          <h5>{{ panier.nborder }}</h5>
           <div class="add_del">
             <button v-on:click="add(panier)">+</button>
             <button v-if="panier.nborder > 0" v-on:click="del(panier)">-</button>
@@ -327,7 +327,7 @@ h1 {
   display: grid;
   grid-template-columns: 15px 20px;
   gap: 5px;
-  margin-top: 20px;
+  
   padding-left: 30px;
 }
 
