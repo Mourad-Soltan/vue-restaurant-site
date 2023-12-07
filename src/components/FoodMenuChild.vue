@@ -1,6 +1,6 @@
 <template>
     <div v-for="(food, index) in foods" :key="index" class="card">
-        <img :src="food.image" class="img">
+        <img :src="require(`@/assets/${food.image}`)" class="img">
         <div class="card__content">
             <h5 class="card__title">{{ food.name }}</h5>
             <p class="card__description">{{ food.p }}</p>

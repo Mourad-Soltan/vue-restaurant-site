@@ -30,7 +30,7 @@ nav {
     display: grid;
     grid-template-columns: 3fr 4fr 1.5fr;
     padding: 20px;
-    margin-bottom: -20px;
+    background-color: #F38D35;
 }
 
 nav img {
@@ -63,7 +63,7 @@ nav img {
 }
 
 .custom-link:hover {
-    color: #F28D35;
+    color: #F5EDA2;
     transform: scale(1.1);
 }
 

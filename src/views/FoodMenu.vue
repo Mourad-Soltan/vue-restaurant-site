@@ -15,7 +15,9 @@
     <div v-for="(panier, index) in paniers" :key="index">
       <div class="body" v-if="panier.nborder > 0">
         <div class="profileFood">
-          <img :src="panier.image">
+
+          <img :src="require(`@/assets/${panier.image}`)">
+          
           <h5>{{ panier.name }}</h5>
         </div>
         <h4>{{ panier.prix }}</h4>
@@ -42,6 +44,7 @@
 <script>
 // @ is an alias to /src
 import FoodMenuChild from "@/components/FoodMenuChild.vue";
+import EventService from "@/services/EventService.js";
 
 export default {
   name: "FoodMenu",
@@ -52,104 +55,7 @@ export default {
   data() {
     return {
       cart: 1,
-      foods: [
-        {
-          id: 0,
-          name: "Food Name",
-          image: require("../assets/images/food.jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 1,
-          name: "Food Name",
-          image: require("../assets/images/food(1).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 2,
-          name: "Food Name",
-          image: require("../assets/images/food(2).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 3,
-          name: "Food Name",
-          image: require("../assets/images/food(3).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 4,
-          name: "Food Name",
-          image: require("../assets/images/food(4).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 5,
-          name: "Food Name",
-          image: require("../assets/images/food(5).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 6,
-          name: "Food Name",
-          image: require("../assets/images/food(6).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 7,
-          name: "Food Name",
-          image: require("../assets/images/food(7).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 8,
-          name: "Food Name",
-          image: require("../assets/images/food(8).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 9,
-          name: "Food Name",
-          image: require("../assets/images/food(9).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 10,
-          name: "Food Name",
-          image: require("../assets/images/food(10).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-        {
-          id: 11,
-          name: "Food Name",
-          image: require("../assets/images/food(11).jpeg"),
-          p: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          nborder: 0,
-          prix: 15,
-        },
-      ],
+      foods: null,
       paniers: [],
     };
   },
@@ -176,7 +82,7 @@ export default {
         }
       }
       this.paniers.push(food);
-      console.log(this.paniers);
+      //console.log(this.paniers);
     },
     calculatePrice(food) {
       return food.nborder * food.prix;
@@ -190,7 +96,18 @@ export default {
       }
       return montants
     }
-  }
+  },
+  created() {
+
+    EventService.getEvents()
+      .then((response) => {
+        //console.log(response.data[0]);
+        this.foods = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 
 };
 </script>
