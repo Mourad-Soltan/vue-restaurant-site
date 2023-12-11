@@ -3,7 +3,7 @@
         <div class="menu">
             <nav>
                 <p><img src="@/assets/icons/tachometer-alt-solid.svg" alt="Dashboard Icon">Dashboard</p>
-                <p>Liste reservation table</p>
+                <p><a href="@/views/admin/diagramm.vue">Liste des réservations de table</a></p>
                 <p>Liste reservation commande</p>
                 <p>Commentaire</p>
             </nav>
@@ -242,9 +242,9 @@
 
 export default {
     name: "admin",
-    
-
 };
+
+
 </script>
 <style scoped>
 .admin {
