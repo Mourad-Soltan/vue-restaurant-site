@@ -7,22 +7,21 @@
 						<h1>Make Your Reservation</h1>
 					</div>
 					<div class="booking-form">
-						<form>
+						<form id="contactForm" @submit.prevent="saveDataToLocalStorage">
 							<div class="information">
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Full Name</span>
-										<input class="form-control" type="text" placeholder="Enter your full name">
+										<input class="form-control" v-model="Full_name" type="text"
+											placeholder="Enter your full name">
 									</div>
 								</div>
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Adult</span>
-										<select class="form-control">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
+										<select class="form-control" v-model="adults">
+											<option v-for="number in options" :key="number" :value="number">{{ number }}
+											</option>
 										</select>
 										<span class="select-arrow"></span>
 									</div>
@@ -30,7 +29,7 @@
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Children</span>
-										<select class="form-control">
+										<select class="form-control" v-model="Children">
 											<option>0</option>
 											<option>1</option>
 											<option>2</option>
@@ -43,13 +42,13 @@
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Check In</span>
-										<input class="form-control" type="date" required>
+										<input class="form-control" v-model="date" type="date" required>
 									</div>
 								</div>
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Time</span>
-										<input class="form-control" type="Time" required>
+										<input class="form-control" v-model="time" type="time" required>
 									</div>
 								</div>
 								<div class="col-md">
@@ -72,6 +71,14 @@ export default {
 	name: 'reservation',
 	props: {
 
+	},
+	data() {
+		return {
+			Full_name:null,
+			adults: 1,
+			Children: '0',
+			options: [1, 2, 3, 4],
+		};
 	},
 }
 
@@ -224,12 +231,14 @@ export default {
 	font-size: 52px;
 	font-weight: 700;
 }
-.information{
+
+.information {
 	display: grid;
 	grid-template-columns: 7fr 2fr 2fr;
 	gap: 10px;
 }
-.date{
+
+.date {
 	display: grid;
 	grid-template-columns: 5fr 5fr 6fr;
 	gap: 10px;

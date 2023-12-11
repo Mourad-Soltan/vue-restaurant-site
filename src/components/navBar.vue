@@ -29,8 +29,9 @@ a {
 nav {
     display: grid;
     grid-template-columns: 3fr 4fr 1.5fr;
-    padding: 20px;
+
     background-color: #F38D35;
+    padding-top: 20px;
 }
 
 nav img {
