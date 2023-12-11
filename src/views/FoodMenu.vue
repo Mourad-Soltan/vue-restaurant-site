@@ -17,7 +17,7 @@
         <div class="profileFood">
 
           <img :src="require(`@/assets/${panier.image}`)">
-          
+
           <h5>{{ panier.name }}</h5>
         </div>
         <h4>{{ panier.prix }}</h4>
@@ -34,8 +34,38 @@
     </div>
     <div class="Valide">
       <span>TOTAL : {{ tolat }}</span>
-      <button class="add_to_order">Valider La Commande</button>
+      <button class="add_to_order" @click="toggleModal">Valider La Commande</button>
     </div>
+
+
+
+
+
+    <div class="modal-container" :class="{ active: isModalActive }">
+      <div class="overlay modal-trigger"></div>
+      <div class="modal1">
+        <button aria-label="close modal" class="close-modal modal-trigger" @click="toggleModal(false)">X</button>
+        <h1 id="modalTitle">Personal informations</h1>
+        <form name="F"  action="" method="POST">
+          <div class="m-4">
+            <label for="name1">First and last name</label>
+            <input type="text" name="t1" id="name1" class="form-control mt-3" v-model="info.user_name">
+            <label for="Numero">Phone number</label>
+            <input type="tel" name="t3" id="Numero" class="form-control mt-3" v-model="info.tel">
+            <label for="adresse">Address</label>
+            <input type="text" name="t4" id="adresse" class="form-control mt-3" v-model="info.adress">
+          </div>
+        </form>
+        <div class="m-4">
+          <input type="submit" class="button active modal-trigger" value="Save Contact" @click.prevent="sauvegardeInfo()">
+          <button type="reset" @click="toggleModal(false)" class="btn btn-light modal-trigger">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
 
   </section>
 </template>
@@ -54,9 +84,15 @@ export default {
   },
   data() {
     return {
-      cart: 1,
+      isModalActive: false,
       foods: null,
       paniers: [],
+      info: {
+        user_name: null,
+        tel: null,
+        adress: null,
+      },
+
     };
   },
   methods: {
@@ -87,6 +123,13 @@ export default {
     calculatePrice(food) {
       return food.nborder * food.prix;
     },
+    toggleModal(open) {
+      if (open) {
+        this.isModalActive = true;
+      } else {
+        this.isModalActive = false;
+      }
+    },
   },
   computed: {
     tolat() {
@@ -110,6 +153,7 @@ export default {
   },
 
 };
+
 </script>
 
 <style scoped>
@@ -260,6 +304,102 @@ export default {
 .Valide span {
   position: relative;
   left: 80%;
+}
+
+.modal-container {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: visibility 0.4s;
+  z-index: 1;
+  /* Added z-index */
+}
+
+.modal-container.active {
+  visibility: visible;
+}
+
+.overlay {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #333333d3;
+  transition: opacity 0.4s 0.2s ease-out;
+  z-index: 1;
+  /* Added z-index */
+  margin-left: -80px;
+}
+
+.modal-container.active .overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+
+.modal1 {
+  opacity: 0;
+  width: 95%;
+  max-width: 500px;
+  min-width: 300px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  z-index: 2;
+  /* Increased z-index */
+}
+
+.modal-container.active .modal1 {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
+}
+
+.close-modal {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: #ff365e;
+  color: #fff;
+}
+
+.modal1 h1 {
+  margin-bottom: 10px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+}
+
+.modal1 p {
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+.button {
+  border: none;
+  outline: none;
+  background-color: #F28D35;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #FFE36B;
+}
+
+.button:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
 }
 
 @media screen and (max-width : 1200px) {
