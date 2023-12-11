@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: "FoodMenuChild",
+    name: "navbar",
 };
 
 </script>

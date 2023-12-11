@@ -15,9 +15,7 @@
     <div v-for="(panier, index) in paniers" :key="index">
       <div class="body" v-if="panier.nborder > 0">
         <div class="profileFood">
-
           <img :src="require(`@/assets/${panier.image}`)">
-
           <h5>{{ panier.name }}</h5>
         </div>
         <h4>{{ panier.prix }}</h4>
@@ -36,38 +34,28 @@
       <span>TOTAL : {{ tolat }}</span>
       <button class="add_to_order" @click="toggleModal">Valider La Commande</button>
     </div>
-
-
-
-
-
-    <div class="modal-container" :class="{ active: isModalActive }">
-      <div class="overlay modal-trigger"></div>
-      <div class="modal1">
-        <button aria-label="close modal" class="close-modal modal-trigger" @click="toggleModal(false)">X</button>
-        <h1 id="modalTitle">Personal informations</h1>
-        <form name="F"  action="" method="POST">
-          <div class="m-4">
-            <label for="name1">First and last name</label>
-            <input type="text" name="t1" id="name1" class="form-control mt-3" v-model="info.user_name">
-            <label for="Numero">Phone number</label>
-            <input type="tel" name="t3" id="Numero" class="form-control mt-3" v-model="info.tel">
-            <label for="adresse">Address</label>
-            <input type="text" name="t4" id="adresse" class="form-control mt-3" v-model="info.adress">
-          </div>
-        </form>
-        <div class="m-4">
-          <input type="submit" class="button active modal-trigger" value="Save Contact" @click.prevent="sauvegardeInfo()">
-          <button type="reset" @click="toggleModal(false)" class="btn btn-light modal-trigger">Close</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
   </section>
+  <div class="modal-container" :class="{ active: isModalActive }">
+    <div class="overlay modal-trigger"></div>
+    <div class="modal1">
+      <button aria-label="close modal" class="close-modal modal-trigger" @click="toggleModal(false)">X</button>
+      <h1 id="modalTitle">Personal informations</h1>
+      <form id="contactForm" @submit.prevent="saveDataToLocalStorage">
+        <div class="m-4">
+          <label for="name1">First and last name</label>
+          <input type="text" id="name1" class="form-control mt-3" v-model="user_name">
+          <label for="Numero">Phone number</label>
+          <input type="tel" id="Numero" class="form-control mt-3" v-model="tel">
+          <label for="adresse">Address</label>
+          <input type="text" name="t4" id="adresse" class="form-control mt-3" v-model="adress">
+        </div>
+        <div class="m-4">
+          <input type="submit" @click="toggleModal(false)" class="button modal-trigger" value="Save Contact">
+          <button type="reset" @click="toggleModal(false), resetForm()" class="btn btn-light modal-trigger">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 
@@ -85,13 +73,11 @@ export default {
   data() {
     return {
       isModalActive: false,
-      foods: null,
+      foods: [],
       paniers: [],
-      info: {
-        user_name: null,
-        tel: null,
-        adress: null,
-      },
+      user_name: null,
+      tel: null,
+      adress: null,
 
     };
   },
@@ -130,6 +116,49 @@ export default {
         this.isModalActive = false;
       }
     },
+    loadDataFromLocalStorage() {
+      const jsonData = localStorage.getItem("commande");
+      if (jsonData) {
+        return JSON.parse(jsonData);
+      } else {
+        return [];
+      }
+    },
+    saveDataToLocalStorage() {
+      try {
+        let data = this.loadDataFromLocalStorage();
+        let jsonData = {
+          name: this.user_name,
+          tel: this.tel,
+          adress: this.adress,
+          commande: this.paniers
+        };
+        data.push(jsonData);
+        localStorage.removeItem("commande");
+        localStorage.setItem("commande", JSON.stringify(data));
+        this.resetForm();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth", // Optional, smooth scrolling animation
+        });
+      } catch (error) {
+        console.error("Error saving data to localStorage:", error);
+      }
+    },
+    resetForm() {
+      EventService.getEvents()
+        .then((response) => {
+          this.foods = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      document.getElementById("contactForm").reset();
+      this.user_name = null;
+      this.tel = null;
+      this.adress = null;
+      this.paniers = [];
+    }
   },
   computed: {
     tolat() {
@@ -141,17 +170,14 @@ export default {
     }
   },
   created() {
-
     EventService.getEvents()
       .then((response) => {
-        //console.log(response.data[0]);
         this.foods = response.data;
       })
       .catch((error) => {
         console.log(error);
       });
   },
-
 };
 
 </script>
@@ -330,7 +356,6 @@ export default {
   transition: opacity 0.4s 0.2s ease-out;
   z-index: 1;
   /* Added z-index */
-  margin-left: -80px;
 }
 
 .modal-container.active .overlay {
@@ -384,6 +409,7 @@ export default {
   line-height: 1.4;
   margin-bottom: 5px;
 }
+
 .button {
   border: none;
   outline: none;
@@ -395,6 +421,7 @@ export default {
   border-radius: 5px;
   transition: all ease 0.1s;
   box-shadow: 0px 5px 0px 0px #FFE36B;
+  margin-right: 20px;
 }
 
 .button:active {
