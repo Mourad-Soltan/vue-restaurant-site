@@ -30,53 +30,61 @@
     </div>
   </section>
   <section class="story">
-    <h1>Our Story</h1>
-    <p>
-      Plongez dans l'histoire de Prestige du Goût, une aventure culinaire qui a commencé avec une passion profonde pour
-      l'art de la gastronomie. Fondé par le visionnaire Chef Pierre Leclerc, notre restaurant est bien plus qu'un lieu
-      pour savourer des plats exceptionnels ; c'est une histoire de dévouement à la perfection culinaire.
-    </p>
-
-    <p>
-      L'aventure a débuté dans une petite cuisine où le Chef Leclerc, guidé par son amour pour les ingrédients de qualité,
-      a commencé à créer des expériences gustatives uniques. Rapidement, sa créativité a conquis les palais, et Prestige
-      du Goût est devenu le rendez-vous des amateurs de cuisine raffinée de la région.
-    </p>
-
-    <p>
-      Au fil des ans, notre restaurant s'est développé en un lieu empreint d'élégance et d'innovation. Chaque plat est une
-      œuvre d'art, alliant traditions culinaires et techniques modernes. Notre équipe de chefs talentueux partage une
-      passion commune pour l'excellence, cherchant constamment à émerveiller vos papilles.
-    </p>
-
-    <p>
-      Aujourd'hui, Prestige du Goût est l'aboutissement d'une histoire riche en saveurs et en émotions. Nous vous invitons
-      à faire partie de cette histoire, à explorer des menus exceptionnels, à créer des souvenirs autour d'une table
-      magnifiquement dressée et à vivre l'essence de la gastronomie raffinée.
-    </p>
-
-    <p>
-      Notre histoire continue avec chaque plat que nous servons, chaque sourire que nous accueillons et chaque moment
-      partagé dans notre établissement. Merci de faire partie de cette aventure gourmande. Nous avons hâte de continuer à
-      écrire notre histoire avec vous, nos précieux convives.
-    </p>
+    <h4 class="diagramme">Daily Table Reservation Metrics: Tracking Demand Trends at Our Restaurant</h4>
+    <div>
+      <canvas id="myChart" width="200" height="200"></canvas>
+    </div>
   </section>
 </template>
 
 <script>
+
 // @ is an alias to /src
 import AboutViewChild from "@/components/AboutViewChild.vue";
+import Chart from 'chart.js/auto';
 
 export default {
   name: "AboutView",
   components: {
     AboutViewChild,
   },
+  mounted() {
+    console.log("hello");
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      datasets: [{
+        label: '# Reservation per day',
+        data: [12, 19, 3, 5, 2, 3, 2],
+        backgroundColor: 'rgba(255, 181, 52)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  }
 };
+
 
 </script>
 
 <style>
+
+#myChart {
+  margin-left: 250px;
+  margin-right: 250px;
+  padding-bottom: 150px;
+  padding-top: 150px;
+}
+
 #titre{
   text-align: center;
   color: #F28D35;
@@ -111,6 +119,13 @@ export default {
 .chefs h1 {
   text-align: center;
   font-size: 50px;
+  color: #F28D35;
+  margin-bottom: 50px;
+}
+
+.diagramme {
+  text-align: center;
+  font-size: 30px;
   color: #F28D35;
   margin-bottom: 50px;
 }
