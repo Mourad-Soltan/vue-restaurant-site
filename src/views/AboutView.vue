@@ -7,14 +7,12 @@
         to discover the quintessence of gastronomy. Since our opening, we have strived to create a place where
         refinement, creativity and passion come together to offer an unforgettable experience to our guests.
       </p>
-
       <p>
         At Prestige du Goût, each dish is a work of art carefully prepared by our talented chefs who
         share a common vision: to elevate cuisine to a level of excellence. We believe that every ingredient has
         its importance, and this is why we favor fresh, local and highest quality products to
         create flavors that transport you.
       </p>
-
       <p>
         Our dedicated team is committed to providing you with attentive and personalized service. Whether for an evening
         romantic, a special celebration or simply for a gastronomic experience, we are here to make
