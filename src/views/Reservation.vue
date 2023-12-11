@@ -13,7 +13,7 @@
 									<div class="form-group">
 										<span class="form-label">Full Name</span>
 										<input class="form-control" v-model="Full_name" type="text"
-											placeholder="Enter your full name">
+											placeholder="Enter your full name" required>
 									</div>
 								</div>
 								<div class="col-md">
@@ -74,11 +74,54 @@ export default {
 	},
 	data() {
 		return {
-			Full_name:null,
+			Full_name: null,
 			adults: 1,
 			Children: '0',
 			options: [1, 2, 3, 4],
+			date: '',
+			time: '',
 		};
+	},
+	methods: {
+		loadDataFromLocalStorage() {
+			const jsonData = localStorage.getItem("reservation");
+			if (jsonData) {
+				return JSON.parse(jsonData);
+			} else {
+				return [];
+			}
+		},
+		saveDataToLocalStorage() {
+			try {
+				let data = this.loadDataFromLocalStorage();
+				let jsonData = {
+					name: this.Full_name,
+					adults: this.adults,
+					Children: this.Children,
+					date: this.date,
+					time: this.time
+				};
+				data.push(jsonData);
+				localStorage.removeItem("reservation");
+				localStorage.setItem("reservation", JSON.stringify(data));
+				this.resetForm();
+				window.scrollTo({
+					top: 0,
+					behavior: "smooth", // Optional, smooth scrolling animation
+				});
+			} catch (error) {
+				console.error("Error saving data to localStorage:", error);
+			}
+		},
+		resetForm() {
+			document.getElementById("contactForm").reset();
+			this.Full_name = '';
+			this.adults = 1;
+			this.Children = '0';
+			this.date = '';
+			this.time = '';
+		}
+
 	},
 }
 
