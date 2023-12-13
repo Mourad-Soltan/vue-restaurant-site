@@ -29,16 +29,13 @@
   </section>
   <section class="story">
     <h4 class="diagramme">Daily Table Reservation Metrics: Tracking Demand Trends at Our Restaurant</h4>
-    <button @click="showChart">Voir</button>
-    <div :class="{ 'display-block': isActive }">
-      <canvas id="myChart" width="200" height="200"></canvas>
+    <div>
+      <canvas id="myChart" style="margin: 200px;"></canvas>
     </div>
   </section>
 </template>
 
 <script>
-
-// @ is an alias to /src
 import AboutViewChild from "@/components/AboutViewChild.vue";
 import Chart from 'chart.js/auto';
 
@@ -50,50 +47,16 @@ export default {
   data() {
     return {
       myChart: null,
-      isActive: false,
-    }
+    };
   },
   mounted() {
-    const ctx = document.getElementById('myChart');
-    this.myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        datasets: [{
-          label: '# Reservation per day',
-          data: [1, 2, 3, 4, 5, 6, 7],
-          backgroundColor: 'rgba(255, 181, 52)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          x: {
-            type: 'category',
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-          },
-          y: {
-            beginAtZero: true
-          }
-        }
-      },
-    });
-
+    // Call the calculreservation method when the component is mounted
+    this.calculreservation();
   },
   methods: {
-    showChart() {
-      if (!this.isActive) {
-        this.calculreservation();
-        this.isActive = true;
-      }
-    },
     loadDataFromLocalStorage() {
       const jsonData = localStorage.getItem("reservation");
-      if (jsonData) {
-        return JSON.parse(jsonData);
-      } else {
-        return [];
-      }
+      return jsonData ? JSON.parse(jsonData) : [];
     },
     countReservationsForDay(dayName) {
       const reservations = this.loadDataFromLocalStorage();
@@ -101,36 +64,57 @@ export default {
         const reservationDay = new Date(reservation.date).toLocaleDateString('en-US', { weekday: 'long' });
         return reservationDay.toLowerCase() === dayName.toLowerCase();
       });
-
       return dayReservations.length;
     },
     calculreservation() {
-      let reservationsMonday = this.countReservationsForDay('Monday');
-      let reservationsTuesday = this.countReservationsForDay('Tuesday');
-      let reservationsWednesday = this.countReservationsForDay('Wednesday');
-      let reservationsThursday = this.countReservationsForDay('Thursday');
-      let reservationsFriday = this.countReservationsForDay('Friday');
-      let reservationsSaturday = this.countReservationsForDay('Saturday');
-      let reservationsSunday = this.countReservationsForDay('Sunday');
-      this.myChart.data.datasets[0].data = [reservationsMonday, reservationsTuesday, reservationsWednesday, reservationsThursday, reservationsFriday, reservationsSaturday, reservationsSunday];
-      //this.myChart.update();
-      console.log(this.myChart.data.datasets[0].data);
+      const reservationsMonday = this.countReservationsForDay('Monday');
+      const reservationsTuesday = this.countReservationsForDay('Tuesday');
+      const reservationsWednesday = this.countReservationsForDay('Wednesday');
+      const reservationsThursday = this.countReservationsForDay('Thursday');
+      const reservationsFriday = this.countReservationsForDay('Friday');
+      const reservationsSaturday = this.countReservationsForDay('Saturday');
+      const reservationsSunday = this.countReservationsForDay('Sunday');
+
+      // Destroy the old chart
+      if (this.myChart) {
+        this.myChart.destroy();
+      }
+
+      // Create a new chart with updated data
+      const ctx = document.getElementById('myChart');
+      this.myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          datasets: [{
+            label: '# Reservation per day',
+            data: [reservationsMonday, reservationsTuesday, reservationsWednesday, reservationsThursday, reservationsFriday, reservationsSaturday, reservationsSunday],
+            backgroundColor: 'rgba(255, 181, 52)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'category',
+              labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        },
+      });
+
+      // Log the updated data
+      //console.log(this.myChart.data.datasets[0].data);
     }
   }
-
 };
-
-
 </script>
 
-<style>
-#myChart {
-  margin-left: 250px;
-  margin-right: 250px;
-  padding-bottom: 150px;
-  padding-top: 150px;
-}
 
+<style>
 #titre {
   text-align: center;
   color: #F28D35;
