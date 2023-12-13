@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import FoodMenu from "../views/FoodMenu.vue";
 import Reservation from "../views/Reservation.vue";
-import admin from "../views/admine/admin.vue";
-import diagramm from "../views/admine/diagramm.vue";
+
 
 const routes = [
   {
@@ -30,16 +29,7 @@ const routes = [
     name: "Reservation",
     component: Reservation,
   },
-  {
-    path: "/admine/admin",
-    name: "admin",
-    component: admin,
-  },
-  {
-    path: "/admine/diagramm",
-    name: "diagramm",
-    component: diagramm,
-  },
+
 ];
 
 const router = createRouter({

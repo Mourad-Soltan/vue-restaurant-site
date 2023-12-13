@@ -29,7 +29,8 @@
   </section>
   <section class="story">
     <h4 class="diagramme">Daily Table Reservation Metrics: Tracking Demand Trends at Our Restaurant</h4>
-    <div>
+    <button @click="showChart">Voir</button>
+    <div :class="{ 'display-block': isActive }">
       <canvas id="myChart" width="200" height="200"></canvas>
     </div>
   </section>
@@ -46,36 +47,83 @@ export default {
   components: {
     AboutViewChild,
   },
-  mounted() {
-    console.log("hello");
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      datasets: [{
-        label: '# Reservation per day',
-        data: [12, 19, 3, 5, 2, 3, 2],
-        backgroundColor: 'rgba(255, 181, 52)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+  data() {
+    return {
+      myChart: null,
+      isActive: false,
     }
-  });
+  },
+  mounted() {
+    const ctx = document.getElementById('myChart');
+    this.myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        datasets: [{
+          label: '# Reservation per day',
+          data: [1, 2, 3, 4, 5, 6, 7],
+          backgroundColor: 'rgba(255, 181, 52)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            type: 'category',
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    });
+
+  },
+  methods: {
+    showChart() {
+      if (!this.isActive) {
+        this.calculreservation();
+        this.isActive = true;
+      }
+    },
+    loadDataFromLocalStorage() {
+      const jsonData = localStorage.getItem("reservation");
+      if (jsonData) {
+        return JSON.parse(jsonData);
+      } else {
+        return [];
+      }
+    },
+    countReservationsForDay(dayName) {
+      const reservations = this.loadDataFromLocalStorage();
+      const dayReservations = reservations.filter(reservation => {
+        const reservationDay = new Date(reservation.date).toLocaleDateString('en-US', { weekday: 'long' });
+        return reservationDay.toLowerCase() === dayName.toLowerCase();
+      });
+
+      return dayReservations.length;
+    },
+    calculreservation() {
+      let reservationsMonday = this.countReservationsForDay('Monday');
+      let reservationsTuesday = this.countReservationsForDay('Tuesday');
+      let reservationsWednesday = this.countReservationsForDay('Wednesday');
+      let reservationsThursday = this.countReservationsForDay('Thursday');
+      let reservationsFriday = this.countReservationsForDay('Friday');
+      let reservationsSaturday = this.countReservationsForDay('Saturday');
+      let reservationsSunday = this.countReservationsForDay('Sunday');
+      this.myChart.data.datasets[0].data = [reservationsMonday, reservationsTuesday, reservationsWednesday, reservationsThursday, reservationsFriday, reservationsSaturday, reservationsSunday];
+      //this.myChart.update();
+      console.log(this.myChart.data.datasets[0].data);
+    }
   }
+
 };
 
 
 </script>
 
 <style>
-
 #myChart {
   margin-left: 250px;
   margin-right: 250px;
@@ -83,11 +131,12 @@ export default {
   padding-top: 150px;
 }
 
-#titre{
+#titre {
   text-align: center;
   color: #F28D35;
   padding-bottom: 100px;
 }
+
 .presentation {
   display: grid;
   grid-template-columns: 500px auto;
