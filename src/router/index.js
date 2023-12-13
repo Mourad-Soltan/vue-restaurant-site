@@ -3,7 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import FoodMenu from "../views/FoodMenu.vue";
 import Reservation from "../views/Reservation.vue";
 import admin from "../views/admine/admin.vue";
-import diagramm from "../views/admine/diagramm.vue";
+import diagramm from '@/views/admine/diagramm.vue';
+import orderList from '@/views/admine/orderList.vue';
 
 const routes = [
   {
@@ -36,9 +37,14 @@ const routes = [
     component: admin,
   },
   {
-    path: "/admine/diagramm",
-    name: "diagramm",
-    component: diagramm,
+    path: '/admine/diagramm', 
+    component: diagramm, 
+    name: 'diagramm'
+  },
+  {
+    path: '/admine/orderList', 
+    component: orderList, 
+    name: 'orderList'
   },
 ];
 
