@@ -27,45 +27,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="(customer,index) in reservations" :key="index">
                                     <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
+                                    <td>{{ customer.date }}</td>
+                                    <td>{{ customer.time }}</td>
+                                    <td>{{ customer.name }}</td>
+                                    <td>{{ customer.adults }}</td>
+                                    <td>{{ customer.Children }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,59 +52,28 @@
                             <thead>
                                 <tr class="text-white">
                                     <th scope="col"></th>
-                                    <th scope="col">Foods</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
                                     <th scope="col">Customer</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Adress</th>
+                                    <th scope="col">Foods</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="(commande, index) in commandes" :key="index">
                                     <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td>Bizerte</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td>Tunis</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td>Tunis</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td>Tunis</td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td>Tunis</td>
+                                    <td>{{ commande.name }}</td>
+                                    <td>{{ commande.tel }}</td>
+                                    <td>{{ commande.adress }}</td>
+                                    <td><select>
+                                            <option value="" disabled selected>Select Food</option>
+                                            <option v-for="(food, foodIndex) in commande.commande" :key="foodIndex">{{
+                                                food.name }}</option>
+                                        </select>
+                                    </td>
+                                    <td>{{ Quantity(commande.commande) }}</td>
+                                    <td>{{ total(commande.commande) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -154,6 +91,49 @@
 
 export default {
     name: "orderList",
+    data() {
+        return {
+            commandes: [],
+            reservations: [],
+            selectedFood: "",
+        }
+    },
+    mounted() {
+        this.commandes = this.loadDataFromLocalStoragecommande();
+        this.reservations = this.loadDataFromLocalStoragereservation();
+    },
+    methods: {
+        loadDataFromLocalStoragecommande() {
+            const jsonData = localStorage.getItem("commande");
+            if (jsonData) {
+                return JSON.parse(jsonData);
+            } else {
+                return [];
+            }
+        },
+        loadDataFromLocalStoragereservation() {
+            const jsonData = localStorage.getItem("reservation");
+            if (jsonData) {
+                return JSON.parse(jsonData);
+            } else {
+                return [];
+            }
+        },
+        Quantity(food) {
+            let qantiter = 0;
+            for (let i = 0; i < food.length; i++) {
+                qantiter += food[i].nborder;
+            }
+            return qantiter;
+        },
+        total(food) {
+            let montants = 0;
+            for (let i = 0; i < food.length; i++) {
+                montants += (food[i].prix * food[i].nborder);
+            }
+            return montants;
+        }
+    },
 };
 
 
@@ -174,7 +154,8 @@ export default {
 .charts {
     padding: 20px;
 }
-img{
+
+img {
     width: 35px;
     height: 35px;
 }
