@@ -13,7 +13,7 @@
 									<div class="form-group">
 										<span class="form-label">Full Name</span>
 										<input class="form-control" v-model="Full_name" type="text"
-											placeholder="Enter your full name" required>
+											placeholder="Enter your full name">
 									</div>
 								</div>
 								<div class="col-md">
@@ -42,13 +42,13 @@
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Check In</span>
-										<input class="form-control" v-model="date" type="date" required>
+										<input class="form-control" v-model="date" type="date">
 									</div>
 								</div>
 								<div class="col-md">
 									<div class="form-group">
 										<span class="form-label">Time</span>
-										<input class="form-control" v-model="time" type="time" required>
+										<input class="form-control" v-model="time" type="time">
 									</div>
 								</div>
 								<div class="col-md">
@@ -93,6 +93,29 @@ export default {
 		},
 		saveDataToLocalStorage() {
 			try {
+				if (!this.Full_name || !this.date || !this.time) {
+					alert("Please fill in all required fields.");
+					return;
+				}
+				const selectedDate = new Date(this.date);
+				const nextWeekStartDate = new Date();
+				nextWeekStartDate.setDate(nextWeekStartDate.getDate() + (7 - nextWeekStartDate.getDay())); // First day of the next week
+				const nextWeekEndDate = new Date(nextWeekStartDate);
+				nextWeekEndDate.setDate(nextWeekEndDate.getDate() + 6); // Last day of the next week
+				if (selectedDate < nextWeekStartDate || selectedDate > nextWeekEndDate) {
+					// Display an error message or take appropriate action
+					alert("Please select a date within the next week.");
+					return;
+				}
+				const selectedTime = this.time.split(":");
+				const selectedHour = parseInt(selectedTime[0]);
+				const selectedMinute = parseInt(selectedTime[1]);
+
+				if (selectedHour > 23 || (selectedHour === 23 && selectedMinute >= 30) || selectedHour < 12) {
+					// Display an error message or take appropriate action
+					alert("Please select a time between 12:00 and 23:30.");
+					return;
+				}
 				let data = this.loadDataFromLocalStorage();
 				let jsonData = {
 					name: this.Full_name,

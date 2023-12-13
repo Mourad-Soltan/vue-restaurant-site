@@ -6,6 +6,7 @@ import admin from "../views/admine/admin.vue";
 import diagramm from '@/views/admine/diagramm.vue';
 import orderList from '@/views/admine/orderList.vue';
 
+
 const routes = [
   {
     path: "/",
@@ -46,6 +47,7 @@ const routes = [
     component: orderList, 
     name: 'orderList'
   },
+
 ];
 
 const router = createRouter({
