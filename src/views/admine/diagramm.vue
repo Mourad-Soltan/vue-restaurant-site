@@ -15,13 +15,11 @@
                         <h6 class="mb-0">Today's Table Reservation Metrics: Tracking Demand Trends in Our Restaurant</h6>
                     </div>
                     <div class="table-responsive">
-                        <canvas id="myChart" width="200" height="200"></canvas>
+                      <canvas id="myChart" ></canvas>
                     </div>
                 </div>
             </div>
-
             <h1>Food Chart</h1>
-
             <div class="container-fluid pt-7 px-7">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -44,7 +42,6 @@ import Chart from 'chart.js/auto';
 export default {
   name: "diagramm",
   mounted() {
-    const ctx = document.getElementById('myChart');
     const ctx2 = document.getElementById('mySecondChart');
     new Chart(ctx2, {
     type: 'bar',
@@ -60,42 +57,64 @@ export default {
       }]
     },
   });
-    new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [8, 10, 12, 14, 16, 18, 20],
-      datasets: [{
-        label: '# Reservation per day',
-        data: [12, 19, 3, 5, 2, 3, 2],
-        backgroundColor: 'rgba(255, 255, 255)',
-        color: 'rgba(255, 255, 255)',
-        borderColor: 'rgba(255, 128, 0)',
-        borderWidth: 2
-      }]
+  this.calculreservation();
+  },
+  methods:{
+    loadDataFromLocalStorage() {
+      const jsonData = localStorage.getItem("reservation");
+      return jsonData ? JSON.parse(jsonData) : [];
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-            grid: {
-                    color: 'white', // Couleur de la ligne de repère horizontale
-            },
-            ticks: {
-                    color: 'orange',  // Couleur des indices de repère sur l'axe x
-            },
-        },
-        x: {
-            beginAtZero: true,
-            grid: {
-                    color: 'white', // Couleur de la ligne de repère horizontale
-            },
-            ticks: {
-                    color: 'orange',  // Couleur des indices de repère sur l'axe x
-            },
-        }
+    countReservationsForDay(dayName) {
+      const reservations = this.loadDataFromLocalStorage();
+      const dayReservations = reservations.filter(reservation => {
+        const reservationDay = new Date(reservation.date).toLocaleDateString('en-US', { weekday: 'long' });
+        return reservationDay.toLowerCase() === dayName.toLowerCase();
+      });
+      return dayReservations.length;
+    },
+    calculreservation() {
+      const reservationsMonday = this.countReservationsForDay('Monday');
+      const reservationsTuesday = this.countReservationsForDay('Tuesday');
+      const reservationsWednesday = this.countReservationsForDay('Wednesday');
+      const reservationsThursday = this.countReservationsForDay('Thursday');
+      const reservationsFriday = this.countReservationsForDay('Friday');
+      const reservationsSaturday = this.countReservationsForDay('Saturday');
+      const reservationsSunday = this.countReservationsForDay('Sunday');
+
+      // Destroy the old chart
+      if (this.myChart) {
+        this.myChart.destroy();
       }
+
+      // Create a new chart with updated data
+      const ctx = document.getElementById('myChart');
+      this.myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          datasets: [{
+            label: '# Reservation per day',
+            data: [reservationsMonday, reservationsTuesday, reservationsWednesday, reservationsThursday, reservationsFriday, reservationsSaturday, reservationsSunday],
+            backgroundColor: 'rgba(255, 181, 52)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'category',
+              labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        },
+      });
+
+      // Log the updated data
+      //console.log(this.myChart.data.datasets[0].data);
     }
-   });
   }
 };
 
