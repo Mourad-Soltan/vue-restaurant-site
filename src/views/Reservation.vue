@@ -278,7 +278,7 @@ export default {
 	height: 80px;
 	border-radius: 7px;
 	font-size: 18px;
-	width: 100%;
+	width: 93%;
 	color: #fff;
 }
 

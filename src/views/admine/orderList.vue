@@ -9,8 +9,8 @@
         </div>
         <div class="charts">
 
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
+            <div class="container-fluid  px-4 color">
+                <div class=" text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Table Reservation</h6>
                     </div>
@@ -42,10 +42,10 @@
             </div>
 
 
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
+            <div class="container-fluid px-4 color">
+                <div class="text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Food Reservation</h6>
+                        <h6 class="mb-0">Food Commander</h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -144,23 +144,45 @@ export default {
     display: grid;
     grid-template-columns: 1.5fr 7fr;
 }
+.color{
+    background:#F38D20;
+    margin:20px;
+    margin-right:20px;
+    border-radius:10px;
+}
 
 .menu {
     padding: 20px;
     height: auto;
-    background: #E1C78F;
+    background: #F38D20;
 }
 
 .charts {
     padding: 20px;
 }
-
-img {
+img{
     width: 35px;
     height: 35px;
 }
 
-.bg-secondary {
-    background: #E1C78F;
+.d-flex{
+    background: #F38D20;
 }
+
+p {
+    font-family: 'Your Preferred Font', sans-serif; /* Choisissez votre police de caractères préférée */
+    font-size: 16px; /* Taille de police */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 10px; /* Marge en bas du paragraphe */
+  }
+
+  a {
+    text-decoration: none; /* Supprimer la décoration du lien par défaut */
+    color: #FFFFFF; /* Couleur du lien */
+    font-weight: bold; /* Gras */
+  }
+
+  a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+  }
 </style>
