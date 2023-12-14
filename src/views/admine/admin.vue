@@ -10,39 +10,30 @@
         <div class="charts">
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <div class="col-sm-6 col-xl-3 color">
+                        <div class="ounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-line-solid.svg">
                             <div class="ms-3">
                                 <p class="mb-2">total reservation</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">{{this.reservation.length}}</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <div class="col-sm-6 col-xl-3 color">
+                        <div class="rounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-bar-solid.svg">
                             <div class="ms-3">
                                 <p class="mb-2">total order</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">{{ this.commandes.length }}</h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <div class="col-sm-6 col-xl-3 color">
+                        <div class="rounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-area-solid.svg">
                             <div class="ms-3">
                                 <p class="mb-2">Profits</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <img src="@/assets/icons/chart-pie-solid.svg" alt="Dashboard Icon">
-                            <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">{{ this.total }}</h6>
                             </div>
                         </div>
                     </div>
@@ -51,8 +42,8 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-md-6 col-xl-4">
-                        <div class="h-100 bg-secondary rounded p-4">
+                    <div class="col-sm-12 col-md-6 col-xl-4" style="margin-bottom:20px;">
+                        <div class="h-100 color rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="mb-0">To Do List</h6>
                             </div>
@@ -119,6 +110,39 @@
 
 export default {
     name: "admin",
+    data() {
+        return {
+            commandes:[],
+            reservation:[],
+        }
+    },
+    mounted(){
+        this.commandes=this.loadDataFromLocalStoragecommande();
+        this.reservation=this.loadDataFromLocalStoragereservation();
+    },
+    methods:{
+        loadDataFromLocalStoragecommande() {
+            const jsonData = localStorage.getItem("commande");
+            return jsonData ? JSON.parse(jsonData) : [];
+        },
+        loadDataFromLocalStoragereservation() {
+            const jsonData = localStorage.getItem("reservation");
+            return jsonData ? JSON.parse(jsonData) : [];
+        },
+        
+    },
+    computed: {
+        total() {
+            let sum = 0;
+            for (let i = 0; i < this.commandes.length; i++) {
+                for (let j = 0; j < this.commandes[i].commande.length; j++) {
+                    sum += this.commandes[i].commande[j].prix * this.commandes[i].commande[j].nborder;
+                }
+            }
+            return sum;
+        }
+    }
+
 };
 
 
@@ -128,6 +152,11 @@ export default {
     margin-top: 16px;
     display: grid;
     grid-template-columns: 1.5fr 7fr;
+}
+.color{
+    background:#F38D20;
+    margin:20px;
+    border-radius:10px;
 }
 
 .menu {

@@ -26,7 +26,7 @@
             <h6 class="mb-0">Today's Table Reservation Metrics: Tracking Demand Trends in Our Restaurant</h6>
           </div>
           <div class="table-responsive">
-            <canvas id="myChart2" width="200" height="200"></canvas>
+            <canvas id="myChart2"></canvas>
           </div>
         </div>
       </div>
@@ -49,7 +49,6 @@ export default {
     }
   },
   mounted() {
-
     this.calculreservation();
     this.calculCommandesChart();
   },
@@ -90,7 +89,7 @@ export default {
             label: '# Reservation per day',
             data: [reservationsMonday, reservationsTuesday, reservationsWednesday, reservationsThursday, reservationsFriday, reservationsSaturday, reservationsSunday],
             backgroundColor: 'rgba(255, 181, 52)',
-            borderWidth: 1
+            borderWidth: 3
           }]
         },
         options: {
