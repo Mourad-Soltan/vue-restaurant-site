@@ -181,23 +181,43 @@ h1 {
 }
 
 .admin {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: 1.5fr 7fr;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1.5fr 7fr;
 }
 
 .menu {
-  padding: 20px;
-  height: auto;
-  background: gray;
+    padding: 20px;
+    height: auto;
+    background: #F38D20;
 }
 
 .charts {
-  padding: 20px;
+    padding: 20px;
+}
+img{
+    width: 35px;
+    height: 35px;
 }
 
-img {
-  width: 35px;
-  height: 35px;
+.bg-secondary {
+    background: #F38D30;
 }
+
+p {
+    font-family: 'Your Preferred Font', sans-serif; /* Choisissez votre police de caractères préférée */
+    font-size: 16px; /* Taille de police */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 10px; /* Marge en bas du paragraphe */
+  }
+
+  a {
+    text-decoration: none; /* Supprimer la décoration du lien par défaut */
+    color: #FFFFFF; /* Couleur du lien */
+    font-weight: bold; /* Gras */
+  }
+
+  a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+  }
 </style>

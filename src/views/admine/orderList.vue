@@ -148,19 +148,35 @@ export default {
 .menu {
     padding: 20px;
     height: auto;
-    background: #E1C78F;
+    background: #F38D20;
 }
 
 .charts {
     padding: 20px;
 }
-
-img {
+img{
     width: 35px;
     height: 35px;
 }
 
-.bg-secondary {
-    background: #E1C78F;
+.d-flex{
+    background: #F38D20;
 }
+
+p {
+    font-family: 'Your Preferred Font', sans-serif; /* Choisissez votre police de caractères préférée */
+    font-size: 16px; /* Taille de police */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 10px; /* Marge en bas du paragraphe */
+  }
+
+  a {
+    text-decoration: none; /* Supprimer la décoration du lien par défaut */
+    color: #FFFFFF; /* Couleur du lien */
+    font-weight: bold; /* Gras */
+  }
+
+  a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+  }
 </style>

@@ -23,7 +23,7 @@
 					</div>
 					<div class="contact-info color-primary">
 						<span>+216 25 438 004</span>
-						<a href="#" class="btn btn-pill btn-outline-light light hvr-sweep-to-right">Book Your Table</a>
+						<a href="#" class="btn btn-pill btn-outline-light light hvr-sweep-to-right"><router-link to="Reservation">Book Your Table</router-link></a>
 					</div>
 				</div>
 			</div>

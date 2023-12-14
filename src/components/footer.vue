@@ -23,10 +23,10 @@
                 <div class="list">
                     <h4>Contact Info</h4>
                     <ul>
-                        <li><a href="#">98 West 21th Street</a></li>
-                        <li><a href="#">New York NY 10016</a></li>
-                        <li><a href="#">+1(123)-456-7890</a></li>
-                        <li><a href="mailto:#">info@mydommain.com</a></li>
+                        <li><a href="#">Bizerte 7000</a></li>
+                        <li><a href="#">Tunisie</a></li>
+                        <li><a href="#">+216 25 438 004</a></li>
+                        <li><a href="mailto:#">prestige@gmail.com</a></li>
                     </ul>
                 </div>
                 <div class="social">

@@ -15,27 +15,27 @@ export default {
       chefs: [
         {
           id:1,
-          name: "Chef name",
+          name: "Farah",
           image: require("../assets/images/pngegg.png"),
-          p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          p:"The Michelin-starred chef, a master of Mediterranean cuisine",
         },
         {
           id:2,
-          name: "Chef name",
+          name: "Nizar",
           image: require("@/assets/images/pngegg (1).png"),
-          p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          p:"The grill master, a charismatic chef, impresses with his mastery of fire",
         },
         {
           id:3,
-          name: "Chef name",
+          name: "Nour",
           image: require("@/assets/images/pngegg (2).png"),
-          p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          p:"A passionate chef specializing in contemporary Asian cuisine",
         },
         {
           id:4,
-          name: "Chef name",
+          name: "Anis",
           image: require("@/assets/images/pngegg (3).png"),
-          p:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          p:"The virtuoso pastry chef, renowned for bold sweet creations",
         },
       ],
     };

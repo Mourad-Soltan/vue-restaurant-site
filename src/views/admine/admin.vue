@@ -14,7 +14,7 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-line-solid.svg">
                             <div class="ms-3">
-                                <p class="mb-2">Today Sale</p>
+                                <p class="mb-2">total reservation</p>
                                 <h6 class="mb-0">$1234</h6>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-bar-solid.svg">
                             <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
+                                <p class="mb-2">total order</p>
                                 <h6 class="mb-0">$1234</h6>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <img src="@/assets/icons/chart-area-solid.svg">
                             <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
+                                <p class="mb-2">Profits</p>
                                 <h6 class="mb-0">$1234</h6>
                             </div>
                         </div>
@@ -108,11 +108,7 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
-
-
-
         </div>
     </div>
 </template>
@@ -137,7 +133,7 @@ export default {
 .menu {
     padding: 20px;
     height: auto;
-    background: #E1C78F;
+    background: #F38D20;
 }
 
 .charts {
@@ -149,6 +145,23 @@ img{
 }
 
 .bg-secondary {
-    background: #E1C78F;
+    background: #F38D30;
 }
+
+p {
+    font-family: 'Your Preferred Font', sans-serif; /* Choisissez votre police de caractères préférée */
+    font-size: 16px; /* Taille de police */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 10px; /* Marge en bas du paragraphe */
+  }
+
+  a {
+    text-decoration: none; /* Supprimer la décoration du lien par défaut */
+    color: #FFFFFF; /* Couleur du lien */
+    font-weight: bold; /* Gras */
+  }
+
+  a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+  }
 </style>
