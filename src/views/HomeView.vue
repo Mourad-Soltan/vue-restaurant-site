@@ -1,28 +1,33 @@
 <template>
-  <HomePage></HomePage>
-  <AboutHomePage></AboutHomePage>
-  <timeView></timeView>
-  <DishesView></DishesView>
-  <Information></Information>
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="@/assets/bizerte.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="@/assets/bizerte.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/bizerte.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
 </template>
 
 <script>
 // @ is an alias to /src
-import HomePage from "@/components/HomePage/HomePage.vue";
-import AboutHomePage from "@/components/HomePage/AboutHomePage.vue";
-import timeView from "@/components/HomePage/timeView.vue";
-import DishesView from "@/components/HomePage/DishesView.vue";
-import Information from "@/components/HomePage/Information.vue";
 
 export default {
   name: "HomeView",
-  components: {
-    HomePage,
-    AboutHomePage,
-    timeView,
-    DishesView,
-    Information,
-  },
 };
 </script>
 
